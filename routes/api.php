@@ -14,7 +14,10 @@ use App\Http\Controllers\PassportController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+Route::get('invlaid', function ()
+{
+	return response()->json(['error' => 'UnAuthorised'], 401);
+})->name('invlaid');
 Route::post('login', [PassportController::class, 'login']);
 Route::post('register', [PassportController::class, 'register']);
  
