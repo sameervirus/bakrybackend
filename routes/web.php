@@ -13,6 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::fallback(function(){
+    return response()->json([
+        'message' => 'Page Not Found. If error persists, contact dev@egyptbakry.com'], 404);
 });
+Route::get('/', function () {
+	return date('H:i:s');
+	$h= 2;
+	if (date('H') > 8) {
+		return $h;
+		$h = $h + 1;    	
+    }
+    return date('H');
+    $due_date = today()->addDays($h);
+    return $due_date;
+});
+use App\Http\Controllers\api\v1\OrderController;
+Route::get('/orders', [OrderController::class, 'getProductionOrders']);
